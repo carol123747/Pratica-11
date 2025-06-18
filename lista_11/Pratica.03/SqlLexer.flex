@@ -4,19 +4,21 @@
 %cup
 %unicode
 
-id = [a-zA-Z_][a-zA-Z0-9_]*
-numero = [0-9]+
+// Definições de expressões regulares
+id = [a-zA-Z_][a-zA-Z0-9_]* //identificador (nome de tabela, coluna, etc.)
+numero = [0-9]+             //número inteiro
 
 %%
 
-"SELECT"  { return new Symbol(sym.SELECT); }
-"FROM"    { return new Symbol(sym.FROM); }
-"WHERE"   { return new Symbol(sym.WHERE); }
-","       { return new Symbol(sym.VIRG); }
-"="       { return new Symbol(sym.IGUAL); }
-{id}      { return new Symbol(sym.ID, yytext()); }
-{numero}  { return new Symbol(sym.NUM, Integer.parseInt(yytext())); }
+// Regras de reconhecimento de tokens
+"SELECT"  { return new Symbol(sym.SELECT); }                            // SELECT
+"FROM"    { return new Symbol(sym.FROM); }                              // FROM
+"WHERE"   { return new Symbol(sym.WHERE); }                             // WHERE
+","       { return new Symbol(sym.VIRG); }                              // vírgula
+"="       { return new Symbol(sym.IGUAL); }                             // igual
+{id}      { return new Symbol(sym.ID, yytext()); }                      // identificador
+{numero}  { return new Symbol(sym.NUM, Integer.parseInt(yytext())); }   // número
 
-[ \t\r\n]+   { /* ignorar espaços em branco */ }
+[ \t\r\n]+   { /* Ignorar espaços em branco */ } // Ignora espaços em branco
 
-.            { System.out.println("Caractere inválido: " + yytext()); return null; }
+.            { System.out.println("Caractere inválido: " + yytext()); return null; } // Trata caracteres inválidos

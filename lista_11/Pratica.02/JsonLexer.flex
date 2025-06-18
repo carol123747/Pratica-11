@@ -4,20 +4,22 @@
 %cup
 %unicode
 
-string = "([^\"])*"
-numero = -?[0-9]+
+// Definições de expressões regulares
+string = "([^\"])*"  //string JSON 
+numero = -?[0-9]+    //número, que pode ser negativo
 
 %%
 
-"{"     { return new Symbol(sym.ABRE_CHAVE); }
-"}"     { return new Symbol(sym.FECHA_CHAVE); }
-"["     { return new Symbol(sym.ABRE_COLCHETE); }
-"]"     { return new Symbol(sym.FECHA_COLCHETE); }
-":"     { return new Symbol(sym.DOIS_PONTOS); }
-","     { return new Symbol(sym.VIRG); }
-{string}  { return new Symbol(sym.STRING, yytext()); }
-{numero}  { return new Symbol(sym.NUM, Integer.parseInt(yytext())); }
+// Regras de reconhecimento de tokens
+"{"     { return new Symbol(sym.ABRE_CHAVE); }         //abre chaves
+"}"     { return new Symbol(sym.FECHA_CHAVE); }        //fecha chaves
+"["     { return new Symbol(sym.ABRE_COLCHETE); }      //abre colchete
+"]"     { return new Symbol(sym.FECHA_COLCHETE); }     //fecha colchete
+":"     { return new Symbol(sym.DOIS_PONTOS); }        //dois pontos
+","     { return new Symbol(sym.VIRG); }               //vírgula
+{string}  { return new Symbol(sym.STRING, yytext()); } //string
+{numero}  { return new Symbol(sym.NUM, Integer.parseInt(yytext())); } // Reconhece um número
 
-[ \t\r\n]+   { /* ignorar espaços em branco */ }
+[ \t\r\n]+   { /* Ignorar espaços em branco */ }        // Ignora espaços em branco
 
-.            { System.out.println("Caractere inválido: " + yytext()); return null; }
+.            { System.out.println("Caractere inválido: " + yytext()); return null; } //caracteres inválidos

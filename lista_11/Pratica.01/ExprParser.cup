@@ -1,31 +1,33 @@
 parser code {:
     public static void main(String[] args) throws Exception {
-        ExprLexer lexer = new ExprLexer(new java.io.FileReader("entrada.txt"));
-        ExprParser parser = new ExprParser(lexer);
-        int resultado = (int) parser.parse().value;
-        System.out.println("Resultado = " + resultado);
+        ExprLexer lexer = new ExprLexer(new java.io.FileReader("entrada.txt")); // Cria um lexer para ler de um arquivo
+        ExprParser parser = new ExprParser(lexer);                              // Cria um parser com o lexer
+        int resultado = (int) parser.parse().value;                             // Realiza a análise e obtém o resultado
+        System.out.println("Resultado = " + resultado);                         // Imprime o resultado
     }
 :};
 
-terminal MAIS, MENOS, VEZES, DIV, REST, POT, ABRE, FECHA;
-terminal Integer NUM;
+terminal MAIS, MENOS, VEZES, DIV, REST, POT, ABRE, FECHA; // Definição dos terminais
+terminal Integer NUM; // Definição do terminal para números inteiros
 
-non terminal Integer expr;
+non terminal Integer expr; // não terminal para as expressões
 
+// precedência dos operadores
 precedence left MAIS, MENOS;
 precedence left VEZES, DIV, REST;
 precedence right POT;
 precedence right UNARIO;
 
-start with expr;
+start with expr; //ponto de partida da análise (expr)
 
-expr ::= expr:a MAIS expr:b         {: RESULT = somar(a, b); :}
-       | expr:a MENOS expr:b        {: RESULT = subtrair(a, b); :}
-       | expr:a VEZES expr:b        {: RESULT = multiplicar(a, b); :}
-       | expr:a DIV expr:b          {: RESULT = dividir(a, b); :}
-       | expr:a REST expr:b          {: RESULT = resto(a, b); :}
-       | expr:a POT expr:b          {: RESULT = potencia(a, b); :}
-       | MENOS expr:a %prec MENOSUNARIO {: RESULT = inverterSinal(a); :}
-       | PARENTESQ expr:a PARENTDIR {: RESULT = a; :}
-       | NUM                  {: return NUM; :}
+// Regras
+expr ::= expr:a MAIS expr:b         {: RESULT = somar(a, b); :}                 // Adição
+       | expr:a MENOS expr:b        {: RESULT = subtrair(a, b); :}              // Subtração
+       | expr:a VEZES expr:b        {: RESULT = multiplicar(a, b); :}           // Multiplicação
+       | expr:a DIV expr:b          {: RESULT = dividir(a, b); :}               // Divisão
+       | expr:a REST expr:b         {: RESULT = resto(a, b); :}                 // Resto
+       | expr:a POT expr:b          {: RESULT = potencia(a, b); :}              // Potência
+       | MENOS expr:a %prec MENOSUNARIO {: RESULT = inverterSinal(a); :}        // Sinal negativo
+       | ABRE expr:a FECHA          {: RESULT = a; :}                           // Expressão entre parênteses
+       | NUM                        {: return NUM; :}                           // Número
 ;
