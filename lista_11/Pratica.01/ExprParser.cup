@@ -1,0 +1,31 @@
+parser code {:
+    public static void main(String[] args) throws Exception {
+        ExprLexer lexer = new ExprLexer(new java.io.FileReader("entrada.txt"));
+        ExprParser parser = new ExprParser(lexer);
+        int resultado = (int) parser.parse().value;
+        System.out.println("Resultado = " + resultado);
+    }
+:};
+
+terminal MAIS, MENOS, VEZES, DIV, REST, POT, ABRE, FECHA;
+terminal Integer NUM;
+
+non terminal Integer expr;
+
+precedence left MAIS, MENOS;
+precedence left VEZES, DIV, REST;
+precedence right POT;
+precedence right UNARIO;
+
+start with expr;
+
+expr ::= expr:a MAIS expr:b         {: RESULT = somar(a, b); :}
+       | expr:a MENOS expr:b        {: RESULT = subtrair(a, b); :}
+       | expr:a VEZES expr:b        {: RESULT = multiplicar(a, b); :}
+       | expr:a DIV expr:b          {: RESULT = dividir(a, b); :}
+       | expr:a REST expr:b          {: RESULT = resto(a, b); :}
+       | expr:a POT expr:b          {: RESULT = potencia(a, b); :}
+       | MENOS expr:a %prec MENOSUNARIO {: RESULT = inverterSinal(a); :}
+       | PARENTESQ expr:a PARENTDIR {: RESULT = a; :}
+       | NUM                  {: return NUM; :}
+;

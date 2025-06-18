@@ -1,0 +1,24 @@
+parser code {:
+    public static void main(String[] args) throws Exception {
+        SqlLexer lexer = new SqlLexer(new java.io.FileReader("entrada.txt"));
+        SqlParser parser = new SqlParser(lexer);
+        parser.parse();
+        System.out.println("Consulta SQL válida!");
+    }
+:};
+
+terminal SELECT, FROM, WHERE, VIRG, IGUAL;
+terminal String ID;
+terminal Integer NUM;
+
+non terminal consulta, lista_campos, condicao;
+
+start with consulta;
+
+consulta ::= SELECT lista_campos FROM ID WHERE condicao;
+
+lista_campos ::= ID
+               | lista_campos VIRG ID
+;
+
+condicao ::= ID IGUAL NUM;

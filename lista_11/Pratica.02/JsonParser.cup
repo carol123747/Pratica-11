@@ -1,0 +1,40 @@
+parser code {:
+    public static void main(String[] args) throws Exception {
+        JsonLexer lexer = new JsonLexer(new java.io.FileReader("entrada.txt"));
+        JsonParser parser = new JsonParser(lexer);
+        parser.parse();
+        System.out.println("JSON válido!");
+    }
+:};
+
+terminal ABRE_CHAVE, FECHA_CHAVE, ABRE_COLCHETE, FECHA_COLCHETE, DOIS_PONTOS, VIRG;
+terminal String STRING;
+terminal Integer NUM;
+
+non terminal valor, chave, lista_pares, par, colchete, lista_valores;
+
+start with valor;
+
+valor ::= STRING
+        | NUM
+        | chave
+        | colchete
+;
+
+chave ::= ABRE_CHAVE FECHA_CHAVE
+         | ABRE_CHAVE lista_pares FECHA_CHAVE
+;
+
+lista_pares ::= par
+              | lista_pares VIRG par
+;
+
+par ::= STRING DOIS_PONTOS valor;
+
+colchete ::= ABRE_COLCHETE FECHA_COLCHETE
+        | ABRE_COLCHETE lista_valores FECHA_COLCHETE
+;
+
+lista_valores ::= valor
+                | lista_valores VIRG valor
+;
