@@ -2,10 +2,10 @@ import java_cup.runtime.*;
 
 parser code {:
     public static void main(String[] args) throws Exception {
-        ExprLexer lexer = new ExprLexer(new java.io.FileReader("entrada_expressao.txt")); // Cria um lexer para ler de um arquivo
-        ExprParser parser = new ExprParser(lexer);                              // Cria um parser com o lexer
-        int resultado = (int) parser.parse().value;                             // Realiza a análise e obtém o resultado
-        System.out.println("Resultado = " + resultado);                         // Imprime o resultado
+        ExprLexer lexer = new ExprLexer(new java.io.FileReader("entrada_expressao.txt")); // Cria um lexer para ler a entrada_expressao.txt
+        ExprParser parser = new ExprParser(lexer);                              // cria um parser com o lexer
+        int resultado = (int) parser.parse().value;                             // faz a análise e obtém o resultado
+        System.out.println("Resultado = " + resultado);                         // imprime o resultado
     }
 :};
 
