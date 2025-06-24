@@ -1,13 +1,21 @@
+import java_cup.runtime.Symbol;
+
 %%
 
-%class ExprLexer
+// Diretivas:
 %cup
 %unicode
+%line
+%column
+%class MeuScanner
+
+// Macros:
+digito = [0-9]
+inteiro = {digito}+
 
 %%
 
 // Regras para os tokens
-[0-9]+      { return new Symbol(sym.NUM, Integer.parseInt(yytext())); }              // números inteiros
 "("         { return new Symbol(sym.ABRE); }                                         // parêntese de abertura
 ")"         { return new Symbol(sym.FECHA); }                                        // parêntese de fechamento
 "+"         { return new Symbol(sym.MAIS); }                                         // adição
