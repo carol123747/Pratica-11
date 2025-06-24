@@ -9,7 +9,7 @@ import java_cup.runtime.Symbol;
 %column
 %class JsonLexer
 
-// Definições
+//MACROS
 string = "([^\"])*"  //string JSON 
 numero = -?[0-9]+    //número, que pode ser negativo
 
