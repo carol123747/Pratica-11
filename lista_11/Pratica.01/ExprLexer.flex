@@ -6,7 +6,7 @@
 
 %%
 
-// Regras de reconhecimento de tokens
+// Regras para os tokens
 [0-9]+      { return new Symbol(sym.NUM, Integer.parseInt(yytext())); }              // números inteiros
 "("         { return new Symbol(sym.ABRE); }                                         // parêntese de abertura
 ")"         { return new Symbol(sym.FECHA); }                                        // parêntese de fechamento
