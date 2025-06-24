@@ -23,28 +23,35 @@ non terminal consulta, campos, lista_campos, tabela, condicao, expressao; // nao
 //ponto de partida da análise
 start with consulta;
 
+// consulta pode ou não ter WHERE no final
 consulta ::= SELECT campos FROM tabela WHERE condicao PVIRG
            | SELECT campos FROM tabela PVIRG
            ;
 
+//campos que para serem selecionados (ex: SELECT)
 campos ::= lista_campos
          ;
 
+//lista de campos pode ser um só ou vários separados por vírgula
 lista_campos ::= ID
                | lista_campos VIRG ID
                ;
 
+// nome da tabela depois do FROM 
 tabela ::= ID
          ;
 
+// A condição depois do WHERE (WHERE idade = 30)
 condicao ::= expressao
            ;
 
+// Cada expressão compara um campo com algum valor
 expressao ::= ID IGUAL valor
             | ID MAIOR valor
             | ID MENOR valor
             ;
 
+// o valor comparado pode ser número ou texto
 valor ::= NUM
         | STRING
         ;
