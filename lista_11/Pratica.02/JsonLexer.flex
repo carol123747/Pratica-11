@@ -4,13 +4,13 @@
 %cup
 %unicode
 
-// Definições de expressões regulares
+// Definições
 string = "([^\"])*"  //string JSON 
 numero = -?[0-9]+    //número, que pode ser negativo
 
 %%
 
-// Regras de reconhecimento de tokens
+// Regras para os tokens
 "{"     { return new Symbol(sym.ABRE_CHAVE); }         //abre chaves
 "}"     { return new Symbol(sym.FECHA_CHAVE); }        //fecha chaves
 "["     { return new Symbol(sym.ABRE_COLCHETE); }      //abre colchete
