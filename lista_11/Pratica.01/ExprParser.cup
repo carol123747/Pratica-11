@@ -1,3 +1,5 @@
+import java_cup.runtime.*;
+
 parser code {:
     public static void main(String[] args) throws Exception {
         ExprLexer lexer = new ExprLexer(new java.io.FileReader("entrada.txt")); // Cria um lexer para ler de um arquivo
