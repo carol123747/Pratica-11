@@ -1,13 +1,16 @@
+import java_cup.runtime.*;
+
 parser code {:
     public static void main(String[] args) throws Exception {
-        JsonLexer lexer = new JsonLexer(new java.io.FileReader("entrada.txt")); 
-        JsonParser parser = new JsonParser(lexer); 
-        parser.parse(); // Realiza a análise do JSON
-        System.out.println("JSON válido!"); 
+        JsonLexer lexer = new JsonLexer(new java.io.FileReader("entrada_json.txt"));   // Cria um lexer para ler a entrada_json.txt
+        JsonParser parser = new JsonParser(lexer);                                     // cria um parser com o lexer
+        parser.parse();                                                                // Realiza a análise do JSON
+        System.out.println("JSON válido!");                                            // imprime o resultado
     }
 :};
 
-terminal ABRE_CHAVE, FECHA_CHAVE, ABRE_COLCHETE, FECHA_COLCHETE, DOIS_PONTOS, VIRG; //terminais
+//terminais
+terminal ABRE_CHAVE, FECHA_CHAVE, ABRE_COLCHETE, FECHA_COLCHETE, DOIS_PONTOS, VIRG; 
 terminal String STRING;
 terminal Integer NUM; 
 
