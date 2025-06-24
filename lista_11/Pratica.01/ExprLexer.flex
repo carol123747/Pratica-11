@@ -7,7 +7,7 @@ import java_cup.runtime.Symbol;
 %unicode
 %line
 %column
-%class MeuScanner
+%class ExprLexer
 
 // Macros:
 digito = [0-9]
