@@ -7,7 +7,7 @@ import java_cup.runtime.Symbol;
 %unicode
 %line
 %column
-%class MeuScanner
+%class SqlLexer
 
 // Macros:
 id = [a-zA-Z_][a-zA-Z0-9_]* // identificador (nome de tabela, coluna, etc.)
