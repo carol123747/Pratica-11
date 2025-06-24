@@ -1,10 +1,15 @@
+import java_cup.runtime.Symbol;
+
 %%
 
-%class SqlLexer
+// Diretivas:
 %cup
 %unicode
+%line
+%column
+%class MeuScanner
 
-// Definições de expressões regulares
+// Macros:
 id = [a-zA-Z_][a-zA-Z0-9_]* //identificador (nome de tabela, coluna, etc.)
 numero = [0-9]+             //número inteiro
 
