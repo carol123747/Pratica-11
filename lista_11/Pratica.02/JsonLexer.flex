@@ -1,8 +1,13 @@
+import java_cup.runtime.Symbol;
+
 %%
 
-%class JsonLexer
+// Diretivas:
 %cup
 %unicode
+%line
+%column
+%class MeuScanner
 
 // Definições
 string = "([^\"])*"  //string JSON 
