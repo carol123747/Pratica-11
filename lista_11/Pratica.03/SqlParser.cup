@@ -9,7 +9,7 @@ parser code {:
     }
 :};
 
-/* terminais */
+// terminais 
 terminal SELECT, FROM, WHERE;
 terminal MAIOR, MENOR, IGUAL;
 terminal VIRG, PVIRG;
